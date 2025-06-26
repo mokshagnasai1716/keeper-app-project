@@ -23,12 +23,21 @@ function CreateArea(props) {
   }
 
   function submitNote(event) {
+    if (note.title.trim() === "" && note.content.trim() === "") {
+      return;
+    }
     props.onAdd(note);
     setNote({
       title: "",
       content: "",
     });
     event.preventDefault();
+  }
+  function handleKeyDown(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault(); // avoid newline
+      submitNote(event);
+    }
   }
 
   function expand() {
@@ -37,7 +46,7 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form className="create-note">
+      <form className="create-note" onKeyDown={handleKeyDown}>
       <input
             name="title"
             onClick={expand}
