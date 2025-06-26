@@ -48,6 +48,7 @@ function CreateArea(props) {
         {isExpanded && (
           <textarea
           name="content"
+          onKeyDown={submitNote}
           onChange={handleChange}
           value={note.content}
           placeholder="Take a note..."
